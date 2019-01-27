@@ -1,0 +1,24 @@
+{
+  "name": "todolistv1",
+  "version": "1.0.0",
+  "description": "To do list template app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BartekPog/To-Do-List.git"
+  },
+  "author": "Bartłomiej Pogodziński",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BartekPog/To-Do-List/issues"
+  },
+  "homepage": "https://github.com/BartekPog/To-Do-List#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
