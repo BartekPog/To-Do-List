@@ -10,27 +10,44 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 let items=["buy food","cook food", "eat food"];
+let workItems=["do homework", "learn web dev"];
 
 app.get('/',function(req,res){
   // res.sendFile(__dirname+"/index.html");
   let date=new Date();
-
   let options = {
     weekday: 'long',
     month: 'long',
     day: 'numeric'
   };
-  let dayString=date.toLocaleDateString("en-US", options);
+  let title="It's "+date.toLocaleDateString("en-US", options)+"!";
 
   res.render("list", {
-    day:dayString,
+    title:title,
     items:items
   });
 });
-app.post("/",function(req,res){
-  items.push(req.body.newItem);
-  res.redirect("/");
+
+app.get("/work", function(req,res){
+  res.render("list", {title: "Work List", items:workItems});
 });
+
+app.get("/about",function(req,res){
+  res.render("about");
+});
+
+app.post("/",function(req,res){
+  console.log(req.body.list);
+  if(req.body.list=="Work List"){
+    workItems.push(req.body.newItem);
+    res.redirect("/work");
+  }else{
+    items.push(req.body.newItem);
+    res.redirect("/");
+  }
+});
+
+
 
 
 app.listen(port,function(){
