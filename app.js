@@ -6,24 +6,30 @@ const bodyParser=require("body-parser");
 const app=express();
 const port=3000;
 app.set('view engine','ejs');
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static("public"));
+
+let items=["buy food","cook food", "eat food"];
 
 app.get('/',function(req,res){
   // res.sendFile(__dirname+"/index.html");
-  let dzienTyg=(new Date()).getDay();
-  let strDzien="";
+  let date=new Date();
 
-  switch (dzienTyg) {
-    case 0:strDzien="niedziela";  break;
-    case 1:strDzien="poniedziałek";  break;
-    case 2:strDzien="wtorek";  break;
-    case 3:strDzien="środa";  break;
-    case 4:strDzien="czwartek";  break;
-    case 5:strDzien="piątek";  break;
-    case 6:strDzien="sobota"; break;
-    default: strDzien="nowy dzień";
-  }
+  let options = {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric'
+  };
+  let dayString=date.toLocaleDateString("en-US", options);
 
-  res.render("list", {dzien:strDzien});
+  res.render("list", {
+    day:dayString,
+    items:items
+  });
+});
+app.post("/",function(req,res){
+  items.push(req.body.newItem);
+  res.redirect("/");
 });
 
 

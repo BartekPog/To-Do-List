@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html lang="pl" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Lista rzeczy</title>
-  </head>
-  <body>
-    <h1>Jest  <%=dzien %>!</h1>
-    <% if(false) { %>
-    <h1>DUPADUPADUPADUPADUPADUPADUPA</h1>
-    <% } %>
 
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Lista rzeczy</title>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="box" id="heading">
+    <h1>It's
+      <%=day%>!</h1>
+  </div>
+
+  <div class="box">
+    <% for (let i=0; i< items.length  ; i++) { %>
+    <div class="item">
+      <input type="checkbox" >
+      <p> <%= items[i] %></p>
+    </div>
+
+    <% } %>
+    <form class="item" action="/" method="post">
+      <input type="text" name="newItem" placeholder="What do you need to do?" autocomplete="off">
+      <button type="submit" name="submit">+</button>
+    </form>
+  </div>
+
+
+
+
+</body>
+
 </html>
