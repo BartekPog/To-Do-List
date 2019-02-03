@@ -2,6 +2,7 @@
 
 const express=require("express");
 const bodyParser=require("body-parser");
+const date=require(__dirname+"/date.js");
 
 const app=express();
 const port=3000;
@@ -9,18 +10,13 @@ app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
-let items=["buy food","cook food", "eat food"];
-let workItems=["do homework", "learn web dev"];
+const items=["buy food","cook food", "eat food"];
+const workItems=["do homework", "learn web dev"];
 
 app.get('/',function(req,res){
   // res.sendFile(__dirname+"/index.html");
-  let date=new Date();
-  let options = {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric'
-  };
-  let title="It's "+date.toLocaleDateString("en-US", options)+"!";
+
+  let title="It's "+date.getDate()+"!";
 
   res.render("list", {
     title:title,
@@ -37,7 +33,8 @@ app.get("/about",function(req,res){
 });
 
 app.post("/",function(req,res){
-  console.log(req.body.list);
+  //console.log(req.body.list);
+
   if(req.body.list=="Work List"){
     workItems.push(req.body.newItem);
     res.redirect("/work");
